@@ -7,23 +7,22 @@ import java.time.LocalDateTime;
 public class CustomerProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // Required for PurchaseRecord logic
     
-    // ... other fields (customerId, fullName, etc.)
-    
-    private boolean active = true; //
+    private String currentTier = "BRONZE"; // Required for TierUpgradeEngine logic
 
-    // Required by CustomerProfileServiceImpl.java:[26,17]
-    public void setActive(boolean active) {
-        this.active = active;
+    // ... other fields like fullName, email, active, etc.
+
+    // ADD THESE SPECIFIC METHODS
+    public Long getId() { 
+        return id; 
     }
 
-    public boolean isActive() {
-        return active;
+    public String getCurrentTier() { 
+        return currentTier; 
     }
-    
-    // Ensure you also have the setter for currentTier
-    public void setCurrentTier(String currentTier) {
-        this.currentTier = currentTier;
+
+    public void setCurrentTier(String currentTier) { 
+        this.currentTier = currentTier; 
     }
 }
