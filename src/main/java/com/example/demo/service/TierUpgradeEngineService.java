@@ -5,6 +5,7 @@ import com.example.demo.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.NoSuchElementException;
+import java.util.List;
 
 @Service
 public class TierUpgradeEngineService {
@@ -61,5 +62,14 @@ public class TierUpgradeEngineService {
         if ("BRONZE".equals(current)) return "SILVER";
         if ("SILVER".equals(current)) return "GOLD";
         return current;
+    }
+    // Fixes the error in TierUpgradeEngineController:26
+    public List<TierHistoryRecord> getHistoryByCustomer(Long customerId) {
+        return historyRepo.findByCustomerId(customerId);
+    }
+
+    // Fixes the error in TierUpgradeEngineController:31
+    public List<TierHistoryRecord> getAllHistory() {
+        return historyRepo.findAll();
     }
 }
