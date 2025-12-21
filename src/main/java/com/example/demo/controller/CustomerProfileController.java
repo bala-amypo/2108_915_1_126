@@ -40,4 +40,17 @@ public class CustomerProfileController {
     public CustomerProfile lookup(@PathVariable String customerId) {
         return service.findByCustomerId(customerId);
     }
+    @GetMapping("/{id}")
+public CustomerProfile getCustomer(@PathVariable Long id) {
+    // Fixed: Use .orElseThrow() to convert Optional to Object
+    return service.getCustomerById(id)
+        .orElseThrow(() -> new java.util.NoSuchElementException("Customer not found"));
+}
+
+@GetMapping("/lookup/{customerId}")
+public CustomerProfile lookup(@PathVariable String customerId) {
+    // Fixed: Use .orElseThrow()
+    return service.findByCustomerId(customerId)
+        .orElseThrow(() -> new java.util.NoSuchElementException("Customer ID not found"));
+}
 }
