@@ -38,4 +38,9 @@ public class CustomerProfileService {
         customer.setCurrentTier(newTier);
         repository.save(customer);
     }
+    public void updateStatus(Long id, boolean active) {
+    CustomerProfile customer = getCustomerById(id);
+    customer.setActive(active);
+    repository.save(customer);
+}
 }
