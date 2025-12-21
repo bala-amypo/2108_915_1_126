@@ -4,7 +4,7 @@ import com.example.demo.model.CustomerProfile;
 import com.example.demo.repository.CustomerProfileRepository;
 import com.example.demo.service.CustomerProfileService;
 import org.springframework.stereotype.Service;
-import java.util.NoSuchElementException; // Required constraint
+import java.util.NoSuchElementException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,20 +18,42 @@ public class CustomerProfileServiceImpl implements CustomerProfileService {
         this.repository = repository;
     }
 
-    // This fixes the final compilation error
+    // Fixes the error regarding missing updateTier
     @Override
     public void updateTier(Long id, String newTier) {
         CustomerProfile customer = repository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Customer not found")); // Required exception
+                .orElseThrow(() -> new NoSuchElementException("Customer not found"));
         customer.setCurrentTier(newTier);
         repository.save(customer);
     }
 
-    // Ensure all other interface methods are implemented...
+    // Fixes the error regarding missing updateStatus
+    @Override
+    public void updateStatus(Long id, boolean active) {
+        CustomerProfile customer = repository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Customer not found"));
+        customer.setActive(active);
+        repository.save(customer);
+    }
+
+    // Ensure all other required methods from the interface are implemented
+    @Override
+    public CustomerProfile createCustomer(CustomerProfile customer) {
+        return repository.save(customer);
+    }
+
+    @Override
+    public Optional<CustomerProfile> getCustomerById(Long id) {
+        return repository.findById(id);
+    }
+
     @Override
     public List<CustomerProfile> getAllCustomers() {
         return repository.findAll();
     }
-    
-    // ... createCustomer, getCustomerById, etc.
+
+    @Override
+    public Optional<CustomerProfile> findByCustomerId(String customerId) {
+        return repository.findByCustomerId(customerId);
+    }
 }
