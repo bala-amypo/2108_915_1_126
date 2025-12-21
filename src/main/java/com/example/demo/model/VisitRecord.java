@@ -2,27 +2,19 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
-
 @Entity
 public class VisitRecord {
-    @Id // This was likely missing or not imported correctly
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    // Change this from String to Long to match the Repository signature
+    private Long customerId; 
     
-    private String customerId; // Use String to match findByCustomerId(String id) requirements
     private LocalDate visitDate;
     private String channel;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_internal_id")
-    private CustomerProfile customer;
-
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    
-    public String getChannel() { return channel; }
-    public void setChannel(String channel) { this.channel = channel; }
-    
-    public void setCustomer(CustomerProfile customer) { this.customer = customer; }
+    // Standard getters and setters
+    public Long getCustomerId() { return customerId; }
+    public void setCustomerId(Long customerId) { this.customerId = customerId; }
 }
