@@ -7,22 +7,33 @@ import java.time.LocalDateTime;
 public class CustomerProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Required for PurchaseRecord logic
+    private Long id;
     
-    private String currentTier = "BRONZE"; // Required for TierUpgradeEngine logic
+    private String customerId;
+    private String fullName;
+    private String email;
+    private String phone;
+    private String currentTier = "BRONZE";
+    private boolean active = true; //
+    private LocalDateTime createdAt;
 
-    // ... other fields like fullName, email, active, etc.
-
-    // ADD THESE SPECIFIC METHODS
-    public Long getId() { 
-        return id; 
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now(); //
     }
 
-    public String getCurrentTier() { 
-        return currentTier; 
+    // Standard Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public boolean isActive() { return active; }
+    
+    // This fixes the "cannot find symbol: method setActive(boolean)" error
+    public void setActive(boolean active) { 
+        this.active = active; 
     }
 
-    public void setCurrentTier(String currentTier) { 
-        this.currentTier = currentTier; 
-    }
+    // Ensure you have these for other logic
+    public String getCurrentTier() { return currentTier; }
+    public void setCurrentTier(String currentTier) { this.currentTier = currentTier; }
 }
