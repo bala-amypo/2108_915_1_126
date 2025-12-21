@@ -5,18 +5,29 @@ import java.time.LocalDate;
 
 @Entity
 public class PurchaseRecord {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private Double amount;
     private LocalDate purchaseDate;
     private String storeLocation;
-    
-    @ManyToOne // The test expects a Customer object reference
-    private CustomerProfile customer; 
 
-    public void setId(long id) { this.id = id; }
+    @ManyToOne
+    @JoinColumn(name = "customer_internal_id")
+    private CustomerProfile customer;
+
+    // Helper for your existing logic
+    private Long customerId; 
+
     public Long getId() { return id; }
-    public void setCustomer(CustomerProfile customer) { this.customer = customer; }
-    public void setPurchaseDate(LocalDate date) { this.purchaseDate = date; }
-    public void setStoreLocation(String loc) { this.storeLocation = loc; }
+    public void setId(Long id) { this.id = id; }
+    public Double getAmount() { return amount; }
+    public void setAmount(Double amount) { this.amount = amount; }
+    public void setCustomer(CustomerProfile customer) { 
+        this.customer = customer; 
+        if (customer != null) this.customerId = customer.getId();
+    }
+    public void setPurchaseDate(LocalDate purchaseDate) { this.purchaseDate = purchaseDate; }
+    public void setStoreLocation(String storeLocation) { this.storeLocation = storeLocation; }
 }

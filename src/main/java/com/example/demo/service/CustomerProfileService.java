@@ -38,8 +38,9 @@ public class CustomerProfileService {
         customer.setCurrentTier(newTier);
         repository.save(customer);
     }
-    public void updateStatus(Long id, boolean active) {
-    CustomerProfile customer = getCustomerById(id);
+   public void updateStatus(Long id, boolean active) {
+    CustomerProfile customer = repository.findById(id)
+            .orElseThrow(() -> new NoSuchElementException("Customer not found"));
     customer.setActive(active);
     repository.save(customer);
 }
