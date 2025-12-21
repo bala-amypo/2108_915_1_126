@@ -9,15 +9,21 @@ public class CustomerProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(unique = true)
-    private String customerId; // Ensure this is exactly 'customerId'
+    // ... other fields (customerId, fullName, etc.)
     
-    private String currentTier = "BRONZE";
+    private boolean active = true; //
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getCustomerId() { return customerId; }
-    public void setCustomerId(String customerId) { this.customerId = customerId; }
-    public String getCurrentTier() { return currentTier; }
-    public void setCurrentTier(String currentTier) { this.currentTier = currentTier; }
+    // Required by CustomerProfileServiceImpl.java:[26,17]
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+    
+    // Ensure you also have the setter for currentTier
+    public void setCurrentTier(String currentTier) {
+        this.currentTier = currentTier;
+    }
 }
