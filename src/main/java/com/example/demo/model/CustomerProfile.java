@@ -5,25 +5,14 @@ import java.time.LocalDateTime;
 
 @Entity
 public class CustomerProfile {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(unique = true, nullable = false)
     private String customerId;
-    
-    private String fullName;
-    
-    @Column(unique = true)
-    private String email;
-    
     private String currentTier = "BRONZE";
-    private Boolean active = true;
-    private LocalDateTime createdAt;
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
-    // Getters and Setters...
+    // IMPORTANT: Add these for the Service to work
+    public String getCurrentTier() { return currentTier; }
+    public void setCurrentTier(String tier) { this.currentTier = tier; }
+    public Long getId() { return id; }
+    // Add other getters/setters as needed...
 }
