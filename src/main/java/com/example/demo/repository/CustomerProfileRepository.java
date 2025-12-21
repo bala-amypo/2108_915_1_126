@@ -8,7 +8,3 @@ import java.util.Optional;
 public interface CustomerProfileRepository extends JpaRepository<CustomerProfile, Long> {
     Optional<CustomerProfile> findByCustomerId(String customerId);
 }
-
-public interface TierUpgradeRuleRepository extends JpaRepository<TierUpgradeRule, Long> {
-    Optional<TierUpgradeRule> findByFromTierAndToTier(String from, String to);
-}
