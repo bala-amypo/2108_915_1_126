@@ -11,10 +11,25 @@ public class TierUpgradeRule {
     private String toTier;
     private Double minSpend;
     private Integer minVisits;
+    private boolean active = true; // Required for the isActive() method
 
     // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(long id) { this.id = id; }
+    
     public String getFromTier() { return fromTier; }
+    public void setFromTier(String fromTier) { this.fromTier = fromTier; }
+    
     public String getToTier() { return toTier; }
+    public void setToTier(String toTier) { this.toTier = toTier; }
+    
     public Double getMinSpend() { return minSpend; }
+    public void setMinSpend(double minSpend) { this.minSpend = minSpend; }
+    
     public Integer getMinVisits() { return minVisits; }
+    public void setMinVisits(int minVisits) { this.minVisits = minVisits; }
+
+    // Method expected by TierUpgradeRuleService
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 }
