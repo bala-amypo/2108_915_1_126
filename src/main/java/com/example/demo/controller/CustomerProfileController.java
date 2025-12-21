@@ -5,6 +5,7 @@ import com.example.demo.service.CustomerProfileService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -23,7 +24,9 @@ public class CustomerProfileController {
 
     @GetMapping("/{id}")
     public CustomerProfile getCustomer(@PathVariable Long id) {
-        return service.getCustomerById(id);
+        // Fixes incompatible types: Optional to CustomerProfile
+        return service.getCustomerById(id)
+                .orElseThrow(() -> new NoSuchElementException("Customer not found"));
     }
 
     @GetMapping
@@ -38,19 +41,8 @@ public class CustomerProfileController {
 
     @GetMapping("/lookup/{customerId}")
     public CustomerProfile lookup(@PathVariable String customerId) {
-        return service.findByCustomerId(customerId);
+        // Fixes incompatible types: Optional to CustomerProfile
+        return service.findByCustomerId(customerId)
+                .orElseThrow(() -> new NoSuchElementException("Customer ID not found"));
     }
-    @GetMapping("/{id}")
-public CustomerProfile getCustomer(@PathVariable Long id) {
-    // Fixed: Use .orElseThrow() to convert Optional to Object
-    return service.getCustomerById(id)
-        .orElseThrow(() -> new java.util.NoSuchElementException("Customer not found"));
-}
-
-@GetMapping("/lookup/{customerId}")
-public CustomerProfile lookup(@PathVariable String customerId) {
-    // Fixed: Use .orElseThrow()
-    return service.findByCustomerId(customerId)
-        .orElseThrow(() -> new java.util.NoSuchElementException("Customer ID not found"));
-}
 }
