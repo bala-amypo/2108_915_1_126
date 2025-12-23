@@ -22,24 +22,23 @@ public class TierUpgradeRuleController {
     }
 
     @PutMapping("/{id}")
-    public TierUpgradeRule updateRule(@PathVariable Long id,
-                                      @RequestBody TierUpgradeRule rule) {
-        return service.updateRule(id, rule);
-    }
-
-    @GetMapping("/active")
-    public List<TierUpgradeRule> getActiveRules() {
-        return service.getActiveRules();
+    public TierUpgradeRule update(@PathVariable Long id,
+                                  @RequestBody TierUpgradeRule rule) {
+        return service.update(id, rule);
     }
 
     @GetMapping
-    public List<TierUpgradeRule> getAllRules() {
-        return service.getAllRules();
+    public List<TierUpgradeRule> getAll() {
+        return service.getAll();
     }
 
-    @GetMapping("/lookup")
-    public TierUpgradeRule lookup(@RequestParam String fromTier,
-                                  @RequestParam String toTier) {
-        return service.getRule(fromTier, toTier);
+    @GetMapping("/{id}")
+    public TierUpgradeRule getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }

@@ -17,22 +17,22 @@ public class VisitRecordController {
     }
 
     @PostMapping
-    public VisitRecord recordVisit(@RequestBody VisitRecord visit) {
-        return service.recordVisit(visit);
-    }
-
-    @GetMapping("/customer/{customerId}")
-    public List<VisitRecord> getByCustomer(@PathVariable Long customerId) {
-        return service.getVisitsByCustomer(customerId);
+    public VisitRecord create(@RequestBody VisitRecord visit) {
+        return service.create(visit);
     }
 
     @GetMapping("/{id}")
     public VisitRecord getById(@PathVariable Long id) {
-        return service.getVisitById(id);
+        return service.getById(id);
     }
 
     @GetMapping
     public List<VisitRecord> getAll() {
-        return service.getAllVisits();
+        return service.getAll();
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }

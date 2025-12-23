@@ -1,32 +1,17 @@
 package com.example.demo.service;
 
 import com.example.demo.model.TierUpgradeRule;
-import com.example.demo.repository.TierUpgradeRuleRepository;
-import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
-@Service
-public class TierUpgradeRuleService {
-    private final TierUpgradeRuleRepository repository;
+public interface TierUpgradeRuleService {
 
-    public TierUpgradeRuleService(TierUpgradeRuleRepository repository) {
-        this.repository = repository;
-    }
+    TierUpgradeRule createRule(TierUpgradeRule rule);
 
-    public TierUpgradeRule createRule(TierUpgradeRule rule) {
-        return repository.save(rule);
-    }
+    TierUpgradeRule update(Long id, TierUpgradeRule rule);
 
-    public List<TierUpgradeRule> getActiveRules() {
-        return repository.findAll().stream()
-                .filter(TierUpgradeRule::isActive)
-                .collect(Collectors.toList());
-    }
+    List<TierUpgradeRule> getAll();
 
-    public TierUpgradeRule getRule(String fromTier, String toTier) {
-        return repository.findByFromTierAndToTier(fromTier, toTier)
-                .orElseThrow(() -> new NoSuchElementException("Rule not found"));
-    }
+    TierUpgradeRule getById(Long id);
+
+    void delete(Long id);
 }
