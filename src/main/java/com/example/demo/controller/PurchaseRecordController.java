@@ -1,38 +1,38 @@
-package com.example.demo.controller;
+// package com.example.demo.controller;
 
-import com.example.demo.model.PurchaseRecord;
-import com.example.demo.service.PurchaseRecordService;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
+// import com.example.demo.model.PurchaseRecord;
+// import com.example.demo.service.PurchaseRecordService;
+// import io.swagger.v3.oas.annotations.tags.Tag;
+// import org.springframework.web.bind.annotation.*;
+// import java.util.List;
 
-@RestController
-@RequestMapping("/api/purchases")
-@Tag(name = "PurchaseRecordController")
-public class PurchaseRecordController {
-    private final PurchaseRecordService service;
+// @RestController
+// @RequestMapping("/api/purchases")
+// @Tag(name = "PurchaseRecordController")
+// public class PurchaseRecordController {
+//     private final PurchaseRecordService service;
 
-    public PurchaseRecordController(PurchaseRecordService service) {
-        this.service = service;
-    }
+//     public PurchaseRecordController(PurchaseRecordService service) {
+//         this.service = service;
+//     }
 
-    @PostMapping
-    public PurchaseRecord recordPurchase(@RequestBody PurchaseRecord purchase) {
-        return service.recordPurchase(purchase);
-    }
+//     @PostMapping
+//     public PurchaseRecord recordPurchase(@RequestBody PurchaseRecord purchase) {
+//         return service.recordPurchase(purchase);
+//     }
 
-    @GetMapping("/customer/{customerId}")
-    public List<PurchaseRecord> getForCustomer(@PathVariable Long customerId) {
-        return service.getPurchasesByCustomer(customerId);
-    }
+//     @GetMapping("/customer/{customerId}")
+//     public List<PurchaseRecord> getForCustomer(@PathVariable Long customerId) {
+//         return service.getPurchasesByCustomer(customerId);
+//     }
 
-    @GetMapping("/{id}")
-    public PurchaseRecord getById(@PathVariable Long id) {
-        return service.getPurchaseById(id);
-    }
+//     @GetMapping("/{id}")
+//     public PurchaseRecord getById(@PathVariable Long id) {
+//         return service.getPurchaseById(id);
+//     }
 
-    @GetMapping
-    public List<PurchaseRecord> listAll() {
-        return service.getAllPurchases();
-    }
-}
+//     @GetMapping
+//     public List<PurchaseRecord> listAll() {
+//         return service.getAllPurchases();
+//     }
+// }
