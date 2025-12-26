@@ -1,38 +1,44 @@
-// package com.example.demo.service.impl;
+package com.example.demo.service.impl;
 
-// import com.example.demo.model.PurchaseRecord;
-// import com.example.demo.repository.PurchaseRecordRepository;
-// import com.example.demo.service.PurchaseRecordService;
-// import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
-// import java.util.List;
+import org.springframework.stereotype.Service;
 
-// @Service
-// public class PurchaseRecordServiceImpl implements PurchaseRecordService {
+import com.example.demo.model.PurchaseRecord;
+import com.example.demo.repository.PurchaseRecordRepository;
+import com.example.demo.service.PurchaseRecordService;
 
-//     private final PurchaseRecordRepository repo;
+@Service
+public class PurchaseRecordServiceImpl implements PurchaseRecordService {
 
-//     public PurchaseRecordServiceImpl(PurchaseRecordRepository repo) {
-//         this.repo = repo;
-//     }
+    private final PurchaseRecordRepository repository;
 
-//     @Override
-//     public PurchaseRecord recordPurchase(PurchaseRecord purchase) {
-//         return repo.save(purchase);
-//     }
+    public PurchaseRecordServiceImpl(PurchaseRecordRepository repository) {
+        this.repository = repository;
+    }
 
-//     @Override
-//     public PurchaseRecord getPurchaseById(Long id) {
-//         return repo.findById(id).orElse(null);
-//     }
+    @Override
+    public PurchaseRecord recordPurchase(PurchaseRecord purchase) {
+        if (purchase.getAmount() <= 0) {
+            throw new IllegalArgumentException("Amount must be positive");
+        }
+        return repository.save(purchase);
+    }
 
-//     @Override
-//     public List<PurchaseRecord> getPurchasesByCustomer(Long customerId) {
-//         return repo.findByCustomerId(customerId);
-//     }
+    @Override
+    public List<PurchaseRecord> getPurchasesByCustomer(Long customerId) {
+        return repository.findByCustomerId(customerId);
+    }
 
-//     @Override
-//     public List<PurchaseRecord> getAllPurchases() {
-//         return repo.findAll();
-//     }
-// }
+    @Override
+    public List<PurchaseRecord> getAllPurchases() {
+        return repository.findAll();
+    }
+
+    @Override
+    public Optional<PurchaseRecord> getPurchaseById(Long id) {
+        return repository.findById(id);
+    }
+}
