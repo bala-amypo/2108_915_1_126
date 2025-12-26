@@ -1,3 +1,4 @@
+
 package com.example.demo.config;
 
 import com.example.demo.security.JwtUtil;
@@ -43,3 +44,4 @@ public class SecurityConfig {
         return http.build();
     }
 }
+
