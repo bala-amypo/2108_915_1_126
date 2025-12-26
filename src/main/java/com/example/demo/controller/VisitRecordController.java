@@ -1,38 +1,42 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import com.example.demo.model.VisitRecord;
-// import com.example.demo.service.VisitRecordService;
-// import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Optional;
 
-// import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
-// @RestController
-// @RequestMapping("/api/visits")
-// public class VisitRecordController {
+import com.example.demo.model.VisitRecord;
+import com.example.demo.service.VisitRecordService;
 
-//     private final VisitRecordService service;
+@RestController
+@RequestMapping("/api/visits")
+public class VisitRecordController {
 
-//     public VisitRecordController(VisitRecordService service) {
-//         this.service = service;
-//     }
+    private final VisitRecordService service;
 
-//     @PostMapping
-//     public VisitRecord create(@RequestBody VisitRecord visit) {
-//         return service.create(visit);
-//     }
+    public VisitRecordController(VisitRecordService service) {
+        this.service = service;
+    }
 
-//     @GetMapping("/{id}")
-//     public VisitRecord getById(@PathVariable Long id) {
-//         return service.getById(id);
-//     }
+    @PostMapping
+    public VisitRecord create(@RequestBody VisitRecord visit) {
+        return service.recordVisit(visit);
+    }
 
-//     @GetMapping
-//     public List<VisitRecord> getAll() {
-//         return service.getAll();
-//     }
+    @GetMapping("/{id}")
+    public Optional<VisitRecord> getById(@PathVariable Long id) {
+        return service.getVisitById(id);
+    }
 
-//     @DeleteMapping("/{id}")
-//     public void delete(@PathVariable Long id) {
-//         service.delete(id);
-//     }
-// }
+    @GetMapping
+    public List<VisitRecord> getAll() {
+        return service.getAllVisits();
+    }
+
+    @GetMapping("/customer/{customerId}")
+    public List<VisitRecord> getByCustomer(
+            @PathVariable Long customerId) {
+        return service.getVisitsByCustomer(customerId);
+    }
+}
+

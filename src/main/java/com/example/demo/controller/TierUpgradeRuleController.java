@@ -1,44 +1,49 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import com.example.demo.model.TierUpgradeRule;
-// import com.example.demo.service.TierUpgradeRuleService;
-// import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Optional;
 
-// import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
-// @RestController
-// @RequestMapping("/api/tier-rules")
-// public class TierUpgradeRuleController {
+import com.example.demo.model.TierUpgradeRule;
+import com.example.demo.service.TierUpgradeRuleService;
 
-//     private final TierUpgradeRuleService service;
+@RestController
+@RequestMapping("/api/tier-rules")
+public class TierUpgradeRuleController {
 
-//     public TierUpgradeRuleController(TierUpgradeRuleService service) {
-//         this.service = service;
-//     }
+    private final TierUpgradeRuleService service;
 
-//     @PostMapping
-//     public TierUpgradeRule createRule(@RequestBody TierUpgradeRule rule) {
-//         return service.createRule(rule);
-//     }
+    public TierUpgradeRuleController(TierUpgradeRuleService service) {
+        this.service = service;
+    }
 
-//     @PutMapping("/{id}")
-//     public TierUpgradeRule update(@PathVariable Long id,
-//                                   @RequestBody TierUpgradeRule rule) {
-//         return service.update(id, rule);
-//     }
+    @PostMapping
+    public TierUpgradeRule create(@RequestBody TierUpgradeRule rule) {
+        return service.createRule(rule);
+    }
 
-//     @GetMapping
-//     public List<TierUpgradeRule> getAll() {
-//         return service.getAll();
-//     }
+    @PutMapping("/{id}")
+    public TierUpgradeRule update(
+            @PathVariable Long id,
+            @RequestBody TierUpgradeRule rule) {
+        return service.updateRule(id, rule);
+    }
 
-//     @GetMapping("/{id}")
-//     public TierUpgradeRule getById(@PathVariable Long id) {
-//         return service.getById(id);
-//     }
+    @GetMapping
+    public List<TierUpgradeRule> getAll() {
+        return service.getAllRules();
+    }
 
-//     @DeleteMapping("/{id}")
-//     public void delete(@PathVariable Long id) {
-//         service.delete(id);
-//     }
-// }
+    @GetMapping("/active")
+    public List<TierUpgradeRule> getActive() {
+        return service.getActiveRules();
+    }
+
+    @GetMapping("/lookup")
+    public Optional<TierUpgradeRule> lookup(
+            @RequestParam String fromTier,
+            @RequestParam String toTier) {
+        return service.getRule(fromTier, toTier);
+    }
+}
