@@ -1,15 +1,11 @@
 package com.example.demo.service;
-
 import com.example.demo.model.VisitRecord;
 import java.util.List;
+import java.util.Optional;
 
 public interface VisitRecordService {
-
-    VisitRecord create(VisitRecord visit);
-
-    VisitRecord getById(Long id);
-
-    List<VisitRecord> getAll();
-
-    void delete(Long id);
+    VisitRecord recordVisit(VisitRecord v);
+    List<VisitRecord> getVisitsByCustomer(Long customerId);
+    List<VisitRecord> getAllVisits();
+    Optional<VisitRecord> getVisitById(Long id);
 }
