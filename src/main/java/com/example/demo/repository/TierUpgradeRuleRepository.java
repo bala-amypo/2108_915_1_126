@@ -1,12 +1,21 @@
-package com.example.demo.service;
-import com.example.demo.entity.TierUpgradeRule;
+package com.example.demo.repository;
+
 import java.util.List;
 import java.util.Optional;
 
-public interface TierUpgradeRuleService { 
-    TierUpgradeRule createRule(TierUpgradeRule r);
-    TierUpgradeRule updateRule(Long id, TierUpgradeRule r);
-    List<TierUpgradeRule> getActiveRules();
-    Optional<TierUpgradeRule> getRule(String fromTier, String toTier);
-    List<TierUpgradeRule> getAllRules();
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.model.TierUpgradeRule;
+
+@Repository
+public interface TierUpgradeRuleRepository
+        extends JpaRepository<TierUpgradeRule, Long> {
+
+    Optional<TierUpgradeRule> findByFromTierAndToTier(
+            String fromTier, String toTier);
+
+    List<TierUpgradeRule> findByActiveTrue();
 }
+
+
