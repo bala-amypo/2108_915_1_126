@@ -1,20 +1,40 @@
-// package com.example.demo.dto;
+package com.example.demo.dto;
 
-// public class AuthResponse {
+public class ApiResponse<T> {
 
-//     private String token;
+    private boolean success;
+    private String message;
+    private T data;
 
-//     public AuthResponse() {}
+    public ApiResponse() {}
 
-//     public AuthResponse(String token) {
-//         this.token = token;
-//     }
+    public ApiResponse(boolean success, String message, T data) {
+        this.success = success;
+        this.message = message;
+        this.data = data;
+    }
 
-//     public String getToken() {
-//         return token;
-//     }
+    public boolean isSuccess() {
+        return success;
+    }
 
-//     public void setToken(String token) {
-//         this.token = token;
-//     }
-// }
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+}
