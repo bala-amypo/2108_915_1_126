@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 import java.time.LocalDateTime;
 
 public class TierHistoryRecord {
@@ -8,7 +8,6 @@ public class TierHistoryRecord {
     private String newTier;
     private LocalDateTime changeDate;
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public Long getCustomerId() { return customerId; }

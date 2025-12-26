@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 public class TierUpgradeRule {
     private Long id;
@@ -8,7 +8,6 @@ public class TierUpgradeRule {
     private Integer minVisits;
     private boolean active;
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getFromTier() { return fromTier; }

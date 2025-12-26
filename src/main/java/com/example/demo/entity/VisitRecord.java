@@ -1,13 +1,12 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 import java.time.LocalDate;
 
 public class VisitRecord {
     private Long id;
     private CustomerProfile customer;
-    private String channel; // STORE, APP, WEB
+    private String channel;
     private LocalDate visitDate;
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public CustomerProfile getCustomer() { return customer; }

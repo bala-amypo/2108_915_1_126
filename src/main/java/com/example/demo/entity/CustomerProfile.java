@@ -1,9 +1,9 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 import java.time.LocalDateTime;
 
 public class CustomerProfile {
     private Long id;
-    private String customerId; // e.g., "CUST-001"
+    private String customerId;
     private String fullName;
     private String email;
     private String phone;
