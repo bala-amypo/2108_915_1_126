@@ -1,44 +1,31 @@
-package com.example.demo.controller;
+package com.example.demo.model;
+import java.time.LocalDateTime;
 
-import com.example.demo.model.CustomerProfile;
-import com.example.demo.service.CustomerProfileService;
-import org.springframework.web.bind.annotation.*;
+public class CustomerProfile {
+    private Long id;
+    private String customerId; // e.g., "CUST-001"
+    private String fullName;
+    private String email;
+    private String phone;
+    private String currentTier;
+    private boolean active;
+    private LocalDateTime createdAt;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/api/customers")
-public class CustomerProfileController {
-
-    private final CustomerProfileService service;
-
-    public CustomerProfileController(CustomerProfileService service) {
-        this.service = service;
-    }
-
-    @PostMapping
-    public CustomerProfile createCustomer(@RequestBody CustomerProfile customer) {
-        return service.createCustomer(customer);
-    }
-
-    @GetMapping("/{id}")
-    public CustomerProfile getCustomer(@PathVariable Long id) {
-        return service.getCustomerById(id);
-    }
-
-    @GetMapping("/lookup/{customerId}")
-    public CustomerProfile getByCustomerId(@PathVariable String customerId) {
-        return service.findByCustomerId(customerId);
-    }
-
-    @GetMapping
-    public List<CustomerProfile> getAllCustomers() {
-        return service.getAllCustomers();
-    }
-
-    @PutMapping("/{id}/tier")
-    public CustomerProfile updateTier(@PathVariable Long id,
-                                      @RequestParam String newTier) {
-        return service.updateTier(id, newTier);
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getCustomerId() { return customerId; }
+    public void setCustomerId(String customerId) { this.customerId = customerId; }
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
+    public String getCurrentTier() { return currentTier; }
+    public void setCurrentTier(String currentTier) { this.currentTier = currentTier; }
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }
