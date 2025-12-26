@@ -1,11 +1,20 @@
-package com.example.demo.service;
-import com.example.demo.entity.PurchaseRecord;
-import java.util.List;
-import java.util.Optional;
+package com.example.demo.repository;
 
-public interface PurchaseRecordService {
-    PurchaseRecord recordPurchase(PurchaseRecord p);
-    List<PurchaseRecord> getPurchasesByCustomer(Long customerId);
-    List<PurchaseRecord> getAllPurchases();
-    Optional<PurchaseRecord> getPurchaseById(Long id);
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.model.PurchaseRecord;
+
+@Repository
+public interface PurchaseRecordRepository
+        extends JpaRepository<PurchaseRecord, Long> {
+
+    List<PurchaseRecord> findByCustomerId(Long customerId);
+
+    List<PurchaseRecord> findByPurchaseDateBetween(
+            LocalDate start, LocalDate end);
 }
+
